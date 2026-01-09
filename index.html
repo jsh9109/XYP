@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>2026 许愿漂流瓶 - 寄往未来的信</title>
+    <style>
+        /* ================= 1. 视觉系统：星辰大海 ================= */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #0f172a;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --primary: #a5b4fc;
+            --accent: #f43f5e;
+            --text-light: #f8fafc;
+            --gold: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 星星背景特效 */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1.5px, transparent 1.5px);
+            background-size: 50px 50px, 100px 100px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.2; pointer-events: none; z-index: -1;
+        }
+
+        .container { width: 100%; max-width: 420px; position: relative; z-index: 10; }
+        .hidden { display: none !important; }
+
+        /* ================= 2. 玻璃拟态卡片 ================= */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ================= 3. 许愿页 ================= */
+        .bottle-icon { 
+            font-size: 80px; text-align: center; display: block; margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
+            animation: float 4s ease-in-out infinite; 
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .title-main {
+            font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 8px;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 30px; }
+
+        .wish-textarea {
+            width: 100%; height: 140px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            color: #fff; font-size: 16px; line-height: 1.6;
+            resize: none; transition: all 0.3s;
+        }
+        .wish-textarea:focus { background: rgba(0, 0, 0, 0.5); border-color: var(--primary); }
+        .wish-textarea::placeholder { color: rgba(255,255,255,0.3); font-style: italic; }
+
+        .btn-glow {
+            width: 100%; padding: 16px; margin-top: 25px;
+            border-radius: 50px; border: none;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white; font-size: 18px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            position: relative; overflow: hidden;
+        }
+        .btn-glow::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine { 100% { left: 100%; } }
+
+        /* ================= 4. 动画页 ================= */
+        .throwing-scene { text-align: center; padding-top: 60px; }
+        .bottle-fly { font-size: 60px; display: inline-block; animation: flyAway 3s forwards; }
+        @keyframes flyAway {
+            0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: scale(0.1) translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .loading-text { margin-top: 20px; color: var(--primary); font-size: 14px; animation: pulse 1.5s infinite; }
+
+        /* ================= 5. 结果页 (信纸风) ================= */
+        .paper-scroll {
+            background: #fffdf5; color: #3e3e3e;
+            padding: 25px 20px; border-radius: 4px;
+            box-shadow: 0 0 0 5px rgba(255,255,255,0.1);
+            position: relative; margin-bottom: 25px;
+            transform: rotate(-1deg);
+        }
+        .paper-header { 
+            border-bottom: 2px solid #3e3e3e; padding-bottom: 5px; margin-bottom: 15px; 
+            display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: #888;
+        }
+        .handwritten { font-size: 16px; line-height: 1.8; text-align: justify; }
+        .stamp {
+            position: absolute; bottom: 15px; right: 15px;
+            width: 80px; height: 80px; border: 3px solid #d32f2f; border-radius: 50%;
+            color: #d32f2f; display: flex; align-items: center; justify-content: center;
+            font-weight: bold; transform: rotate(-15deg); opacity: 0.6; pointer-events: none;
+        }
+
+        .prob-box { text-align: center; margin: 20px 0; }
+        .prob-val { font-size: 56px; font-weight: 900; color: var(--gold); text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+
+        /* 模糊锁定 */
+        .lock-container {
+            background: rgba(0,0,0,0.3); border: 1px dashed rgba(255,255,255,0.3);
+            border-radius: 12px; padding: 20px; position: relative; overflow: hidden;
+        }
+        .blur-content { filter: blur(6px); opacity: 0.5; user-select: none; }
+        .lock-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 5;
+        }
+        .unlock-btn {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+            color: white; border: none; padding: 10px 25px; border-radius: 30px;
+            font-weight: bold; box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+            cursor: pointer; animation: pulse 2s infinite;
+        }
+
+        /* ================= 6. 支付页 (完美复刻图5) ================= */
+        .pay-panel { 
+            background: #fff; 
+            border-radius: 20px; 
+            padding: 30px 20px; 
+            text-align: center; 
+            color: #333; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .pay-title {
+            font-size: 22px;
+            color: #333;
+            font-family: serif;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .pay-price {
+            font-size: 46px;
+            color: #ff4757;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: sans-serif;
+        }
+        .pay-old-price {
+            color: #aaa;
+            font-size: 13px;
+            text-decoration: line-through;
+            margin-bottom: 25px;
+        }
+        
+        .qr-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .qr-card {
+            width: 120px;
+            text-align: center;
+            position: relative;
+        }
+        .qr-header-wx {
+            background: #2ecc71;
+            color: white;
+            font-size: 11px;
+            padding: 4px;
+            border-radius: 6px 6px 0 0;
+            font-weight: bold;
+        }
+        .qr-header-ali {
+            background: #3498db;
+            color: white;
+            font-size: 11px;
+            padding: 4px;
+            border-radius: 6px 6px 0 0;
+            font-weight: bold;
+        }
+        .qr-img-box {
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 5px;
+            background: #fff;
+        }
+        .qr-img-box img {
+            width: 100%;
+            display: block;
+        }
+        .qr-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .copy-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .copy-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .copy-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .copy-item:last-child { margin-bottom: 0; }
+        .copy-link {
+            color: #ff4757;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 71, 87, 0.3);
+        }
+        .copy-link.blue { 
+            color: #3498db; 
+            border-bottom-color: rgba(52, 152, 219, 0.3); 
+        }
+
+        .btn-upload {
+            background: #2f4f4f; /* 深墨绿 */
+            color: white;
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3);
+            transition: transform 0.1s;
+        }
+        .btn-upload:active { transform: scale(0.98); }
+        
+        /* 底部招募框 (虚线) */
+        .footer-recruit-box {
+            border: 1px dashed rgba(255,255,255,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+        }
+        .recruit-icon { margin-right: 5px; }
+        .recruit-link {
+            color: #fff;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* ================= 7. 完整结果页 ================= */
+        .final-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 2px solid #f3e5c9; /* 浅金边框 */
+            padding: 30px 20px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .final-card::before {
+            content: '“';
+            position: absolute;
+            top: -10px; left: 20px;
+            font-size: 60px; color: #f3e5c9; background: #fff;
+            height: 30px; line-height: 40px; font-family: serif; padding: 0 10px;
+        }
+        
+        .result-section { margin-bottom: 25px; }
+        .res-title {
+            color: #f43f5e; font-weight: bold; font-size: 16px; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .res-content { font-size: 15px; line-height: 1.7; color: #333; text-align: justify; }
+
+        @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="page1" class="glass-card">
+        <div class="bottle-icon">🍾</div>
+        <h1 class="title-main">2026 许愿漂流瓶</h1>
+        <p class="subtitle">在这个瓶子里，写下你对2026年的一个执念</p>
+        
+        <textarea id="userWish" class="wish-textarea" placeholder="例如：
+希望2026年存款达到50万...
+希望能在今年遇见正缘...
+希望家人身体健康..."></textarea>
+        
+        <button class="btn-glow" onclick="throwBottle()">
+            🌊 密封并抛入时间之海
+        </button>
+        <p style="text-align:center; font-size:12px; opacity:0.5; margin-top:15px;">已有 23,041 个愿望正在漂流</p>
+    </div>
+
+    <div id="page2" class="hidden throwing-scene">
+        <div class="bottle-fly">🍾</div>
+        <div class="loading-text">
+            正在穿越 2025 的时间迷雾...<br>
+            <span style="font-size:12px; opacity:0.7;">正在连接宇宙能量场</span>
+        </div>
+    </div>
+
+    <div id="page3" class="hidden">
+        <div class="glass-card" style="padding-top:10px;">
+            <div style="text-align:center; margin-bottom:15px;">
+                <span style="background:rgba(255,255,255,0.15); font-size:12px; padding:4px 12px; border-radius:12px;">✨ 收到一封来自未来的回信</span>
+            </div>
+
+            <div class="paper-scroll">
+                <div class="paper-header">
+                    <span>TO: 许愿人</span>
+                    <span>FROM: 2026.12.31</span>
+                </div>
+                <div id="aiResponseText" class="handwritten"></div>
+                <div class="stamp">宇宙<br>回响</div>
+            </div>
+
+            <div class="prob-box">
+                <div style="font-size:14px; opacity:0.8;">愿望圆梦概率</div>
+                <div class="prob-val" id="probVal">92%</div>
+            </div>
+
+            <div class="lock-container">
+                <div class="blur-content">
+                    <p><strong>🗓️ 关键转折点：</strong>2026年6月，你会遇到...</p>
+                    <p><strong>🚧 最大阻碍：</strong>情绪内耗可能会...</p>
+                    <p><strong>🚀 行动指南：</strong>坚持做这一件事...</p>
+                </div>
+                <div class="lock-overlay">
+                    <div style="font-size:24px; margin-bottom:5px;">🔒</div>
+                    <div style="font-size:14px; margin-bottom:10px; font-weight:bold;">解锁完整《圆梦指引》</div>
+                    <button class="unlock-btn" onclick="goToPay()">立即查看 (¥2.99)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page4" class="hidden">
+        <div class="pay-panel">
+            <h2 class="pay-title">解锁未来指引</h2>
+            <div class="pay-price">¥2.99</div>
+            <p class="pay-old-price">原价 ¥29.9</p>
+
+            <div class="qr-row">
+                <div class="qr-card">
+                    <div class="qr-header-wx">推荐使用微信支付</div>
+                    <div class="qr-img-box"><img src="wechat_qrcode.jpg" alt="微信"></div>
+                    <div class="qr-label">微信扫码</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-header-ali">推荐使用支付宝</div>
+                    <div class="qr-img-box"><img src="alipay_qrcode.png" alt="支付宝"></div>
+                    <div class="qr-label">支付宝扫码</div>
+                </div>
+            </div>
+
+            <div class="copy-area">
+                <div class="copy-title">无法扫码？复制账号转账：</div>
+                <div class="copy-item">
+                    <span>微信: hch91178</span>
+                    <span class="copy-link" onclick="copyTxt('hch91178')">复制</span>
+                </div>
+                <div class="copy-item">
+                    <span>支付宝: 313360631@qq.com</span>
+                    <span class="copy-link blue" onclick="copyTxt('313360631@qq.com')">复制</span>
+                </div>
+            </div>
+
+            <label class="btn-upload">
+                📷 上传付款截图，自动解锁
+                <input type="file" accept="image/*" style="display:none" onchange="handleUpload(event)">
+            </label>
+        </div>
+        
+        <div class="footer-recruit-box">
+            <div><span class="recruit-icon">📢</span> 招许愿瓶项目学徒</div>
+            <div class="recruit-link" onclick="copyTxt('HCH91178')">微信: HCH91178 (点击复制)</div>
+        </div>
+    </div>
+
+    <div id="page5" class="hidden">
+        <div style="text-align:center; margin-bottom:20px;">
+            <div style="font-size:40px;">✨</div>
+            <h2 style="color:#a5b4fc;">完整指引已解锁</h2>
+        </div>
+
+        <div class="final-card">
+            <div class="result-section">
+                <div class="res-title">📅 2026年关键转折点</div>
+                <div id="fullRes1" class="res-content"></div>
+            </div>
+
+            <div class="result-section">
+                <div class="res-title">🚧 阻碍你的最大绊脚石</div>
+                <div id="fullRes2" class="res-content"></div>
+            </div>
+
+            <div class="result-section">
+                <div class="res-title">🚀 宇宙行动建议</div>
+                <div id="fullRes3" class="res-content"></div>
+            </div>
+        </div>
+
+        <button class="btn-glow" style="background:#475569; box-shadow:none;" onclick="location.reload()">
+            再许一个愿
+        </button>
+
+        <div class="footer-recruit-box">
+            <div>📢 招许愿瓶项目学徒</div>
+            <div class="recruit-link" onclick="copyTxt('HCH91178')">微信: HCH91178 (点击复制)</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const SERVER_KEY = "SCT303445TGU9j8Q5VLg6rT7eryLe8L41v"; 
+    let userWishText = "";
+    let detectedType = "general";
+
+    // 智能回复库
+    const templates = {
+        money: {
+            short: "我听到了金币碰撞的声音。2026年你的财帛宫有动静，曾经看似无用的投入，将在秋天迎来惊人的回报。",
+            full1: "在2026年的8月-9月，你将迎来一次重要的财务契机。这可能源于一个‘旧识’带来的信息，或者一项副业的突然爆发。",
+            full2: "最大的绊脚石是‘急于求成’和‘跟风’。宇宙的能量通过积累运作，千万不要在黎明前放弃，也不要触碰不熟悉的投机项目。",
+            full3: "建立一个‘许愿账户’，每月存入一笔固定资金作为种子。多穿金色或红色的配饰，能增强你的吸金磁场。"
+        },
+        love: {
+            short: "红色的丝线正在慢慢收紧。那个懂你奇奇怪怪，也陪你可可爱爱的人，正在穿越人海向你走来。",
+            full1: "2026年的春季（3月-5月）桃花能量最旺。在一次非正式的聚会、旅行或学习场合中，你会遇到令你心动的人。",
+            full2: "最大的绊脚石是‘过去的阴影’和‘过度防御’。你潜意识里的防御机制让你在关系推进时想要后退。试着敞开心扉，这一次是安全的。",
+            full3: "提升衣品，尝试换一个新发型。每周五晚上不要宅在家里，多去书店、艺术展或公园。你的正缘是一个温文尔雅的人。"
+        },
+        career: {
+            short: "星盘显示你的‘官禄宫’正在闪耀。之前的迷茫将如大雾散去，一条清晰的上升通道正在为你打开。",
+            full1: "年中（6月）将是你的转折点。一个困扰你许久的项目或考试将迎刃而解，你会得到上级或导师的高度认可。",
+            full2: "你最大的敌人是‘拖延’和‘自我怀疑’。不要等到准备好了再出发，现在就是最好的时机。小心身边一个属‘火’的竞争者。",
+            full3: "保持专注，减少无效社交。把办公桌或书桌整理干净，摆放一盆常青植物，有助于稳定你的事业/学业磁场。"
+        },
+        health: {
+            short: "宇宙感受到了你对安宁的渴望。2026年将是‘疗愈’的一年，旧的负担将卸下，身心将重获轻盈。",
+            full1: "入冬（11月）前后，你的身体能量会达到一个小高峰。利用这段时间养成一个新习惯（如瑜伽或晨跑），将受益终身。",
+            full2: "需要警惕的是‘情绪内耗’。身体的很多不适源于未表达的情绪。不要为了面子而压抑自己，学会拒绝不舒服的请求。",
+            full3: "多接触大自然，森林和海洋能快速为你充电。饮食上多摄入根茎类食物，它们能增强你与大地的连接，让你更稳重。"
+        },
+        general: {
+            short: "宇宙接收到了你的信号。虽然这个愿望有些独特，但2026年对你而言是‘重塑’的一年，新的翅膀正在生长。",
+            full1: "下半年是你能量场的爆发期。你会意外获得一个展示自我的舞台，请务必抓住这次机会，不要退缩。",
+            full2: "阻碍你的是‘对未知的恐惧’。你习惯待在舒适区，但奇迹往往发生在舒适区之外。试着做一件你从未做过的事。",
+            full3: "保持每天记录三件感恩的小事。多晒太阳，保持房间通风。你的幸运色是白色和蓝色，它们能帮你理清思绪。"
+        }
+    };
+
+    // 防乱填校验 (白名单逻辑)
+    function validateInput(text) {
+        if (text.length < 2) return "信号太弱了，请多写几个字描述你的愿望...";
+        // 允许汉字、英文
+        if (!/[a-zA-Z\u4e00-\u9fa5]/.test(text)) return "宇宙无法解读纯符号代码，请用文字写下愿望。";
+        if (/^(.)\1+$/.test(text)) return "请真诚地写下愿望，不要发送重复的信号干扰宇宙。";
+        return "OK";
+    }
+
+    function throwBottle() {
+        const wish = document.getElementById('userWish').value.trim();
+        const checkResult = validateInput(wish);
+        
+        if (checkResult !== "OK") {
+            alert("🔮 提示：\n" + checkResult);
+            return;
+        }
+        
+        userWishText = wish;
+
+        // 智能分类
+        if (wish.match(/钱|富|财|暴|赚|薪|贷|金|买房|车/)) detectedType = 'money';
+        else if (wish.match(/爱|婚|对象|男|女|桃花|伴|情|脱单/)) detectedType = 'love';
+        else if (wish.match(/工|业|职|干|升|学|考|研|分|榜|上岸/)) detectedType = 'career';
+        else if (wish.match(/病|瘦|美|健|康|安|寿|药/)) detectedType = 'health';
+        else detectedType = 'general';
+
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+
+        setTimeout(() => {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            generateResult();
+        }, 3000);
+    }
+
+    function generateResult() {
+        const tpl = templates[detectedType];
+        document.getElementById('aiResponseText').innerText = tpl.short;
+        const prob = Math.floor(Math.random() * (99 - 85 + 1)) + 85;
+        document.getElementById('probVal').innerText = prob + "%";
+        window.fullResultData = tpl;
+    }
+
+    function goToPay() {
+        document.getElementById('page3').classList.add('hidden');
+        document.getElementById('page4').classList.remove('hidden');
+    }
+
+    function handleUpload(e) {
+        if(e.target.files.length === 0) return;
+        document.querySelector('.btn-upload').innerHTML = '⏳ 正在连接未来...'; // 修复按钮状态
+
+        fetch(`https://sctapi.ftqq.com/${SERVER_KEY}.send`, {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ title: '💰许愿瓶-新订单2.99', desp: `愿望: ${userWishText}\n类型: ${detectedType}` })
+        }).catch(()=>{});
+
+        setTimeout(() => {
+            alert("✅ 宇宙能量连接成功！完整指引已解锁。");
+            showFullResult();
+        }, 1500);
+    }
+
+    function showFullResult() {
+        const tpl = window.fullResultData || templates.general;
+        document.getElementById('page4').classList.add('hidden');
+        document.getElementById('page5').classList.remove('hidden');
+        document.getElementById('fullRes1').innerText = tpl.full1;
+        document.getElementById('fullRes2').innerText = tpl.full2;
+        document.getElementById('fullRes3').innerText = tpl.full3;
+    }
+
+    function copyTxt(t) {
+        // 兼容性复制
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(t).then(() => alert('复制成功')).catch(() => fallbackCopy(t));
+        } else {
+            fallbackCopy(t);
+        }
+    }
+    
+    function fallbackCopy(t) {
+        const input = document.createElement('textarea');
+        input.value = t;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        alert('复制成功');
+    }
+</script>
+</body>
+</html>
