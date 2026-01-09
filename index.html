@@ -76,8 +76,21 @@
         }
         .subtitle { text-align: center; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 30px; }
 
+        /* 新增：产品说明 */
+        .intro-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .intro-title { font-weight: bold; color: var(--primary); margin-bottom: 5px; }
+
         .wish-textarea {
-            width: 100%; height: 140px;
+            width: 100%; height: 120px;
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 16px;
@@ -112,7 +125,7 @@
         }
         .loading-text { margin-top: 20px; color: var(--primary); font-size: 14px; animation: pulse 1.5s infinite; }
 
-        /* ================= 5. 结果页 (信纸风) ================= */
+        /* ================= 5. 结果页 ================= */
         .paper-scroll {
             background: #fffdf5; color: #3e3e3e;
             padding: 25px 20px; border-radius: 4px;
@@ -153,174 +166,59 @@
             cursor: pointer; animation: pulse 2s infinite;
         }
 
-        /* ================= 6. 支付页 (完美复刻图5) ================= */
+        /* ================= 6. 支付页 ================= */
         .pay-panel { 
-            background: #fff; 
-            border-radius: 20px; 
-            padding: 30px 20px; 
-            text-align: center; 
-            color: #333; 
+            background: #fff; border-radius: 20px; padding: 30px 20px; text-align: center; color: #333; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        .pay-title {
-            font-size: 22px;
-            color: #333;
-            font-family: serif;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .pay-price {
-            font-size: 46px;
-            color: #ff4757;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-family: sans-serif;
-        }
-        .pay-old-price {
-            color: #aaa;
-            font-size: 13px;
-            text-decoration: line-through;
-            margin-bottom: 25px;
-        }
+        .pay-title { font-size: 22px; color: #333; font-family: serif; margin-bottom: 5px; font-weight: bold; }
+        .pay-price { font-size: 46px; color: #ff4757; font-weight: bold; margin-bottom: 5px; font-family: sans-serif; }
+        .pay-old-price { color: #aaa; font-size: 13px; text-decoration: line-through; margin-bottom: 25px; }
         
-        .qr-row {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .qr-card {
-            width: 120px;
-            text-align: center;
-            position: relative;
-        }
-        .qr-header-wx {
-            background: #2ecc71;
-            color: white;
-            font-size: 11px;
-            padding: 4px;
-            border-radius: 6px 6px 0 0;
-            font-weight: bold;
-        }
-        .qr-header-ali {
-            background: #3498db;
-            color: white;
-            font-size: 11px;
-            padding: 4px;
-            border-radius: 6px 6px 0 0;
-            font-weight: bold;
-        }
-        .qr-img-box {
-            border: 1px solid #eee;
-            border-top: none;
-            border-radius: 0 0 6px 6px;
-            padding: 5px;
-            background: #fff;
-        }
-        .qr-img-box img {
-            width: 100%;
-            display: block;
-        }
-        .qr-label {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
+        .qr-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .qr-card { width: 120px; text-align: center; position: relative; }
+        .qr-header-wx { background: #2ecc71; color: white; font-size: 11px; padding: 4px; border-radius: 6px 6px 0 0; font-weight: bold; }
+        .qr-header-ali { background: #3498db; color: white; font-size: 11px; padding: 4px; border-radius: 6px 6px 0 0; font-weight: bold; }
+        .qr-img-box { border: 1px solid #eee; border-top: none; border-radius: 0 0 6px 6px; padding: 5px; background: #fff; }
+        .qr-img-box img { width: 100%; display: block; }
+        .qr-label { font-size: 12px; color: #666; margin-top: 5px; }
         
-        .copy-area {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .copy-title {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        .copy-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            margin-bottom: 8px;
-            color: #555;
-        }
+        .copy-area { background: #f8f9fa; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: left; }
+        .copy-title { font-size: 12px; color: #666; margin-bottom: 10px; }
+        .copy-item { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #555; }
         .copy-item:last-child { margin-bottom: 0; }
-        .copy-link {
-            color: #ff4757;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255, 71, 87, 0.3);
-        }
-        .copy-link.blue { 
-            color: #3498db; 
-            border-bottom-color: rgba(52, 152, 219, 0.3); 
-        }
+        .copy-link { color: #ff4757; font-weight: bold; text-decoration: none; cursor: pointer; border-bottom: 1px solid rgba(255, 71, 87, 0.3); }
+        .copy-link.blue { color: #3498db; border-bottom-color: rgba(52, 152, 219, 0.3); }
 
         .btn-upload {
-            background: #2f4f4f; /* 深墨绿 */
-            color: white;
-            width: 100%;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3);
-            transition: transform 0.1s;
+            background: #2D6A4F; color: white; width: 100%; padding: 16px; border-radius: 10px; font-size: 16px; font-weight: bold; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3); margin-bottom: 20px;
         }
-        .btn-upload:active { transform: scale(0.98); }
         
-        /* 底部招募框 (虚线) */
-        .footer-recruit-box {
-            border: 1px dashed rgba(255,255,255,0.3);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            margin-top: 30px;
-            color: rgba(255,255,255,0.8);
-            font-size: 13px;
-        }
-        .recruit-icon { margin-right: 5px; }
-        .recruit-link {
-            color: #fff;
-            text-decoration: underline;
-            cursor: pointer;
-            margin-top: 5px;
-            display: inline-block;
-        }
+        /* 激活码输入区域 */
+        .code-area { border-top: 1px dashed #eee; padding-top: 20px; margin-top: 20px; }
+        .code-input-group { display: flex; gap: 10px; }
+        .code-input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #fcfcfc; }
+        .btn-code { background: #667eea; color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        .footer-recruit-box { border: 1px dashed rgba(255,255,255,0.3); border-radius: 12px; padding: 15px; text-align: center; margin-top: 30px; color: rgba(255,255,255,0.8); font-size: 13px; }
+        .recruit-link { color: #fff; text-decoration: underline; cursor: pointer; margin-top: 5px; display: inline-block; }
 
         /* ================= 7. 完整结果页 ================= */
         .final-card {
-            background: #fff;
-            border-radius: 16px;
-            border: 2px solid #f3e5c9; /* 浅金边框 */
-            padding: 30px 20px;
-            position: relative;
-            margin-bottom: 25px;
+            background: #fff; border-radius: 16px; border: 2px solid #f3e5c9; padding: 30px 20px; position: relative; margin-bottom: 25px;
         }
         .final-card::before {
-            content: '“';
-            position: absolute;
-            top: -10px; left: 20px;
-            font-size: 60px; color: #f3e5c9; background: #fff;
-            height: 30px; line-height: 40px; font-family: serif; padding: 0 10px;
+            content: '“'; position: absolute; top: -10px; left: 20px; font-size: 60px; color: #f3e5c9; background: #fff; height: 30px; line-height: 40px; font-family: serif; padding: 0 10px;
         }
-        
         .result-section { margin-bottom: 25px; }
-        .res-title {
-            color: #f43f5e; font-weight: bold; font-size: 16px; margin-bottom: 8px;
-            display: flex; align-items: center; gap: 6px;
-        }
+        .res-title { color: #f43f5e; font-weight: bold; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
         .res-content { font-size: 15px; line-height: 1.7; color: #333; text-align: justify; }
+
+        /* ================= 8. 管理员后台 ================= */
+        .admin-stat { background: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        .admin-btn { width: 100%; padding: 12px; background: #475569; color: white; border: none; border-radius: 8px; margin-top: 10px; font-size: 14px; cursor: pointer; }
+        .card-list { max-height: 200px; overflow-y: auto; background: #fff; padding: 10px; border-radius: 8px; font-family: monospace; margin-top: 10px; font-size: 12px; border: 1px solid #e2e8f0; text-align: left; }
+        .card-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 5px 0; }
 
         @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} }
     </style>
@@ -334,6 +232,11 @@
         <h1 class="title-main">2026 许愿漂流瓶</h1>
         <p class="subtitle">在这个瓶子里，写下你对2026年的一个执念</p>
         
+        <div class="intro-box">
+            <div class="intro-title">🔮 什么是“许愿漂流瓶”？</div>
+            这是一个连接未来的能量场。当你写下愿望并抛出瓶子，宇宙的算法将为你计算圆梦概率，并回传一份来自2026年的<b>“行动指引”</b>。
+        </div>
+
         <textarea id="userWish" class="wish-textarea" placeholder="例如：
 希望2026年存款达到50万...
 希望能在今年遇见正缘...
@@ -342,7 +245,8 @@
         <button class="btn-glow" onclick="throwBottle()">
             🌊 密封并抛入时间之海
         </button>
-        <p style="text-align:center; font-size:12px; opacity:0.5; margin-top:15px;">已有 23,041 个愿望正在漂流</p>
+        
+        <div style="text-align:center; margin-top:20px; font-size:12px; opacity:0.3; cursor:pointer;" onclick="showAdminPanel()">⚡ 管理入口</div>
     </div>
 
     <div id="page2" class="hidden throwing-scene">
@@ -423,6 +327,14 @@
                 📷 上传付款截图，自动解锁
                 <input type="file" accept="image/*" style="display:none" onchange="handleUpload(event)">
             </label>
+
+            <div class="code-area">
+                <div style="font-size:12px; color:#999; margin-bottom:8px;">已有激活码/万能码？</div>
+                <div class="code-input-group">
+                    <input type="text" id="activationCode" class="code-input" placeholder="请输入激活码">
+                    <button class="btn-code" onclick="verifyUnlockCode()">验证</button>
+                </div>
+            </div>
         </div>
         
         <div class="footer-recruit-box">
@@ -464,12 +376,59 @@
         </div>
     </div>
 
+    <div id="adminPage" class="hidden glass-card">
+        <h3 style="text-align:center; margin-bottom:15px; color:#fff;">🔧 管理员后台</h3>
+        <div id="adminLoginBox">
+            <input type="password" id="adminPwdInput" class="wish-textarea" style="height:50px; margin-bottom:10px;" placeholder="请输入管理员密码">
+            <button onclick="loginAdmin()" class="btn-glow" style="margin-top:10px;">登录</button>
+        </div>
+        
+        <div id="adminContent" class="hidden">
+            <div class="admin-stat">
+                <div style="font-size:24px; font-weight:bold; color:#333;" id="validCount">0</div>
+                <div style="font-size:12px; color:#666;">可用激活码</div>
+            </div>
+            
+            <div style="background:#fff; padding:15px; border-radius:12px; color:#333;">
+                <h4 style="margin-bottom:10px;">生成新卡密</h4>
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <input type="number" id="genCount" value="10" style="padding:8px; border:1px solid #ddd; border-radius:4px; width:80px;">
+                    <button class="admin-btn" style="margin-top:0; background:#667eea;" onclick="genCards()">生成</button>
+                </div>
+                <button onclick="exportCurrentBatch()" class="admin-btn" style="background:#2E7D32;">导出本次生成</button>
+                
+                <h4 style="margin-top:20px; margin-bottom:10px;">卡密列表 (前50条)</h4>
+                <div class="card-list" id="cardList"></div>
+                <button onclick="exportAllCards()" class="admin-btn" style="background:#00b894;">导出全部历史</button>
+            </div>
+            
+            <button onclick="location.reload()" class="admin-btn">退出后台</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    const SERVER_KEY = "SCT303445TGU9j8Q5VLg6rT7eryLe8L41v"; 
+    // 配置区
+    const CONFIG = {
+        MASTER_CODE: "GEMINI-VIP", // 万能码，输入这个直接解锁
+        ADMIN_PWD: "lss900201",    // 后台密码
+        SERVER_KEY: "SCT303445TGU9j8Q5VLg6rT7eryLe8L41v"
+    };
+
+    // Safari 容错存储
+    var safeStorage = {
+        _mem: {},
+        isAvailable: function() {
+            try { var x = '__storage_test__'; localStorage.setItem(x, x); localStorage.removeItem(x); return true; } catch(e) { return false; }
+        }(),
+        getItem: function(key) { return this.isAvailable ? localStorage.getItem(key) : this._mem[key]; },
+        setItem: function(key, val) { if(this.isAvailable) localStorage.setItem(key, val); else this._mem[key] = val; }
+    };
+
     let userWishText = "";
     let detectedType = "general";
+    let currentBatchCards = [];
 
     // 智能回复库
     const templates = {
@@ -505,27 +464,21 @@
         }
     };
 
-    // 防乱填校验 (白名单逻辑)
+    // 校验逻辑
     function validateInput(text) {
         if (text.length < 2) return "信号太弱了，请多写几个字描述你的愿望...";
-        // 允许汉字、英文
         if (!/[a-zA-Z\u4e00-\u9fa5]/.test(text)) return "宇宙无法解读纯符号代码，请用文字写下愿望。";
         if (/^(.)\1+$/.test(text)) return "请真诚地写下愿望，不要发送重复的信号干扰宇宙。";
         return "OK";
     }
 
+    // 流程控制
     function throwBottle() {
         const wish = document.getElementById('userWish').value.trim();
         const checkResult = validateInput(wish);
-        
-        if (checkResult !== "OK") {
-            alert("🔮 提示：\n" + checkResult);
-            return;
-        }
+        if (checkResult !== "OK") { alert("🔮 提示：\n" + checkResult); return; }
         
         userWishText = wish;
-
-        // 智能分类
         if (wish.match(/钱|富|财|暴|赚|薪|贷|金|买房|车/)) detectedType = 'money';
         else if (wish.match(/爱|婚|对象|男|女|桃花|伴|情|脱单/)) detectedType = 'love';
         else if (wish.match(/工|业|职|干|升|学|考|研|分|榜|上岸/)) detectedType = 'career';
@@ -555,11 +508,12 @@
         document.getElementById('page4').classList.remove('hidden');
     }
 
+    // 图片上传处理
     function handleUpload(e) {
         if(e.target.files.length === 0) return;
-        document.querySelector('.btn-upload').innerHTML = '⏳ 正在连接未来...'; // 修复按钮状态
+        document.querySelector('.btn-upload').innerHTML = '⏳ 正在连接未来...';
 
-        fetch(`https://sctapi.ftqq.com/${SERVER_KEY}.send`, {
+        fetch(`https://sctapi.ftqq.com/${CONFIG.SERVER_KEY}.send`, {
             method: 'POST', headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ title: '💰许愿瓶-新订单2.99', desp: `愿望: ${userWishText}\n类型: ${detectedType}` })
         }).catch(()=>{});
@@ -568,6 +522,36 @@
             alert("✅ 宇宙能量连接成功！完整指引已解锁。");
             showFullResult();
         }, 1500);
+    }
+
+    // 激活码验证
+    function verifyUnlockCode() {
+        const input = document.getElementById('activationCode').value.trim().toUpperCase();
+        if(!input) return alert('请输入激活码');
+
+        // 万能码
+        if(input === CONFIG.MASTER_CODE) {
+            alert("✨ 万能钥匙已生效！");
+            showFullResult();
+            return;
+        }
+
+        // 普通码验证
+        let cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
+        const cardIndex = cards.findIndex(c => c.code === input);
+
+        if(cardIndex !== -1) {
+            if(cards[cardIndex].used) {
+                alert('❌ 该激活码已被使用');
+            } else {
+                cards[cardIndex].used = true;
+                safeStorage.setItem('wish_cards', JSON.stringify(cards));
+                alert("✅ 激活成功！");
+                showFullResult();
+            }
+        } else {
+            alert('❌ 无效的激活码');
+        }
     }
 
     function showFullResult() {
@@ -580,15 +564,6 @@
     }
 
     function copyTxt(t) {
-        // 兼容性复制
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(t).then(() => alert('复制成功')).catch(() => fallbackCopy(t));
-        } else {
-            fallbackCopy(t);
-        }
-    }
-    
-    function fallbackCopy(t) {
         const input = document.createElement('textarea');
         input.value = t;
         document.body.appendChild(input);
@@ -596,6 +571,80 @@
         document.execCommand('copy');
         document.body.removeChild(input);
         alert('复制成功');
+    }
+
+    // --- 后台管理逻辑 ---
+    function showAdminPanel() {
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('adminPage').classList.remove('hidden');
+    }
+
+    function loginAdmin() {
+        const p = document.getElementById('adminPwdInput').value;
+        if(p === CONFIG.ADMIN_PWD) {
+            document.getElementById('adminLoginBox').classList.add('hidden');
+            document.getElementById('adminContent').classList.remove('hidden');
+            renderAdmin();
+        } else {
+            alert('密码错误');
+        }
+    }
+
+    function genCards() {
+        const count = parseInt(document.getElementById('genCount').value);
+        if(!count || count < 1) return alert('请输入数量');
+        
+        let cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
+        currentBatchCards = []; 
+        
+        for(let i=0; i<count; i++) {
+            const code = 'WISH-' + Math.random().toString(36).substr(2,4).toUpperCase() + '-' + Math.random().toString(36).substr(2,4).toUpperCase();
+            const newCard = { code: code, used: false, time: new Date().toLocaleString() };
+            currentBatchCards.push(newCard); 
+        }
+        
+        cards = [...currentBatchCards, ...cards];
+        safeStorage.setItem('wish_cards', JSON.stringify(cards));
+        alert(`成功生成 ${count} 个激活码！`);
+        renderAdmin();
+    }
+
+    function renderAdmin() {
+        const cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
+        const validCount = cards.filter(c => !c.used).length;
+        document.getElementById('validCount').innerText = validCount;
+
+        let html = '';
+        cards.slice(0, 50).forEach(c => {
+            html += `<div class="card-item">
+                <span style="font-weight:bold; color:${c.used ? '#999' : 'green'}">${c.code}</span>
+                <span>${c.used ? '🔴 已用' : '🟢 未用'}</span>
+            </div>`;
+        });
+        document.getElementById('cardList').innerHTML = html;
+    }
+
+    function exportCurrentBatch() {
+        if(currentBatchCards.length === 0) return alert('请先生成激活码');
+        const text = currentBatchCards.map(c => c.code).join('\n');
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'wish_codes_new.txt';
+        a.click();
+    }
+
+    function exportAllCards() {
+        const cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
+        if(cards.length === 0) return alert('暂无数据');
+        const text = cards.map(c => c.code).join('\n');
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'wish_codes_all.txt';
+        a.click();
     }
 </script>
 </body>
