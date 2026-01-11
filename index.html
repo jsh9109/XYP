@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>2026 许愿漂流瓶 - 寄往未来的信</title>
+    <title>2026 许愿漂流瓶 - 时空回信</title>
     <style>
-        /* ================= 1. 视觉系统：星辰大海 ================= */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+        /* ================= 视觉系统：深海星空蓝 (清晰且高级) ================= */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Cinzel:wght@700&display=swap');
 
         :root {
-            --bg-color: #0f172a;
-            --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --primary: #a5b4fc;
-            --accent: #f43f5e;
-            --text-light: #f8fafc;
-            --gold: #fbbf24;
+            --bg-main: #0f172a; /* 深蓝背景 */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #0b1120 100%);
+            --card-glass: rgba(30, 41, 59, 0.8); /* 蓝调玻璃底色，更通透 */
+            --border-accent: linear-gradient(135deg, #a5b4fc 20%, #6366f1 100%); /* 星光蓝紫边框 */
+            --text-main: #ffffff; /* 主白字，最高对比度 */
+            --text-sub: #94a3b8; /* 次级灰蓝字 */
+            --accent-color: #38bdf8; /* 高亮天蓝 */
+            --btn-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* 宇宙极光按钮 */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -25,7 +25,7 @@
             font-family: 'Noto Serif SC', serif;
             background: var(--bg-gradient);
             min-height: 100vh;
-            color: var(--text-light);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,7 +34,7 @@
             position: relative;
         }
 
-        /* 星星背景特效 */
+        /* 星光背景 */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
@@ -42,135 +42,125 @@
                 radial-gradient(white 1.5px, transparent 1.5px);
             background-size: 50px 50px, 100px 100px;
             background-position: 0 0, 25px 25px;
-            opacity: 0.2; pointer-events: none; z-index: -1;
+            opacity: 0.3; pointer-events: none; z-index: -1;
         }
 
-        .container { width: 100%; max-width: 420px; position: relative; z-index: 10; }
+        .container { width: 100%; max-width: 420px; position: relative; z-index: 10; padding-bottom: 40px; }
         .hidden { display: none !important; }
 
-        /* ================= 2. 玻璃拟态卡片 ================= */
+        /* 通用玻璃卡片 (更清晰) */
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(165, 180, 252, 0.2); /* 淡淡的蓝紫色边框 */
             border-radius: 24px;
-            padding: 30px 25px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 30px 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             animation: fadeIn 0.8s ease;
+            position: relative;
+            overflow: hidden;
         }
+        /* 顶部流光动画 */
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: var(--border-accent);
+            animation: scan 4s infinite linear;
+        }
+        @keyframes scan { 0% {transform: translateX(-100%);} 100% {transform: translateX(100%);} }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ================= 3. 许愿页 ================= */
-        .bottle-icon { 
-            font-size: 80px; text-align: center; display: block; margin-bottom: 20px;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
-            animation: float 4s ease-in-out infinite; 
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        /* ================= 首页 (Landing) ================= */
+        .hero-logo { font-size: 60px; text-align: center; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6)); animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-        .title-main {
-            font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 8px;
-            background: linear-gradient(to right, #fff, #a5b4fc);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .hero-title { 
+            font-family: 'Cinzel', serif; 
+            font-size: 28px; text-align: center; margin-bottom: 5px; font-weight: bold;
+            background: linear-gradient(to right, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
-        .subtitle { text-align: center; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 30px; }
+        .hero-sub { text-align: center; font-size: 12px; color: var(--text-sub); margin-bottom: 30px; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* 新增：产品说明 */
-        .intro-box {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 15px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 25px;
-            line-height: 1.6;
-            border: 1px solid rgba(255,255,255,0.1);
+        /* 功能矩阵 */
+        .matrix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .matrix-item { 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s;
         }
-        .intro-title { font-weight: bold; color: var(--primary); margin-bottom: 5px; }
+        .matrix-item:hover { border-color: #a5b4fc; background: rgba(99, 102, 241, 0.1); }
+        .m-icon { font-size: 24px; display: block; margin-bottom: 5px; }
+        .m-title { font-size: 14px; color: var(--text-main); font-weight: bold; }
+        .m-desc { font-size: 10px; color: var(--text-sub); }
 
-        .wish-textarea {
-            width: 100%; height: 120px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 16px;
-            padding: 20px;
-            color: #fff; font-size: 16px; line-height: 1.6;
-            resize: none; transition: all 0.3s;
-        }
-        .wish-textarea:focus { background: rgba(0, 0, 0, 0.5); border-color: var(--primary); }
-        .wish-textarea::placeholder { color: rgba(255,255,255,0.3); font-style: italic; }
+        /* 权益列表 */
+        .vip-list { margin-bottom: 25px; border-left: 2px solid #6366f1; padding-left: 15px; }
+        .vip-item { font-size: 13px; margin-bottom: 8px; color: var(--text-sub); display: flex; align-items: center; }
+        .vip-item.highlight { color: var(--text-main); font-weight: bold; }
+        .vip-item::before { content: '✦'; margin-right: 8px; color: #6366f1; font-size: 10px; }
 
-        .btn-glow {
-            width: 100%; padding: 16px; margin-top: 25px;
-            border-radius: 50px; border: none;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white; font-size: 18px; font-weight: bold; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-            position: relative; overflow: hidden;
+        /* 输入框 & 按钮 */
+        .input-glow {
+            width: 100%; padding: 15px; background: rgba(255,255,255,0.1); /* 稍微亮一点的背景 */
+            border: 1px solid rgba(165, 180, 252, 0.3); border-radius: 12px;
+            color: var(--text-main); text-align: center; font-family: monospace; font-size: 16px;
+            transition: all 0.3s; margin-bottom: 15px;
         }
-        .btn-glow::after {
+        .input-glow:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.3); outline: none; background: rgba(255,255,255,0.15); }
+        .input-glow::placeholder { color: rgba(255,255,255,0.4); }
+
+        .btn-cosmic {
+            width: 100%; padding: 16px; border: none; border-radius: 50px;
+            background: var(--btn-gradient);
+            color: white; font-size: 16px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4); position: relative; overflow: hidden;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-cosmic::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             animation: shine 3s infinite;
         }
         @keyframes shine { 100% { left: 100%; } }
 
-        /* ================= 4. 动画页 ================= */
-        .throwing-scene { text-align: center; padding-top: 60px; }
-        .bottle-fly { font-size: 60px; display: inline-block; animation: flyAway 3s forwards; }
-        @keyframes flyAway {
+        /* ================= 许愿页 & 动画 ================= */
+        .wish-textarea {
+            width: 100%; height: 140px; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 16px;
+            padding: 20px; color: var(--text-main); font-size: 16px; line-height: 1.6;
+            resize: none; font-family: inherit; margin-bottom: 20px;
+        }
+        .wish-textarea:focus { border-color: #a5b4fc; background: rgba(255,255,255,0.15); }
+        .wish-textarea::placeholder { color: rgba(255,255,255,0.4); }
+        
+        .throwing-scene { text-align: center; padding-top: 80px; }
+        .bottle-fly { font-size: 80px; animation: fly 3s forwards ease-in-out; filter: drop-shadow(0 0 20px #6366f1); }
+        @keyframes fly { 
             0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: scale(0.1) translateY(-100px) rotate(360deg); opacity: 0; }
+            100% { transform: scale(0) translateY(-200px) rotate(720deg); opacity: 0; }
         }
-        .loading-text { margin-top: 20px; color: var(--primary); font-size: 14px; animation: pulse 1.5s infinite; }
 
-        /* ================= 5. 结果页 ================= */
+        /* ================= 免费结果页 ================= */
         .paper-scroll {
-            background: #fffdf5; color: #3e3e3e;
-            padding: 25px 20px; border-radius: 4px;
-            box-shadow: 0 0 0 5px rgba(255,255,255,0.1);
-            position: relative; margin-bottom: 25px;
-            transform: rotate(-1deg);
+            background: #fffdf5; color: #333; padding: 25px 20px; border-radius: 2px;
+            box-shadow: 0 0 0 5px rgba(255,255,255,0.1); position: relative; margin-bottom: 25px;
+            transform: rotate(-1deg); font-family: 'Courier New', serif;
         }
-        .paper-header { 
-            border-bottom: 2px solid #3e3e3e; padding-bottom: 5px; margin-bottom: 15px; 
-            display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: #888;
+        .paper-header { border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; font-size: 12px; letter-spacing: 1px; }
+        
+        .blur-lock-box {
+            position: relative; border: 1px dashed rgba(165, 180, 252, 0.5); border-radius: 12px;
+            padding: 20px; margin-top: 20px; background: rgba(0,0,0,0.2);
         }
-        .handwritten { font-size: 16px; line-height: 1.8; text-align: justify; }
-        .stamp {
-            position: absolute; bottom: 15px; right: 15px;
-            width: 80px; height: 80px; border: 3px solid #d32f2f; border-radius: 50%;
-            color: #d32f2f; display: flex; align-items: center; justify-content: center;
-            font-weight: bold; transform: rotate(-15deg); opacity: 0.6; pointer-events: none;
-        }
-
-        .prob-box { text-align: center; margin: 20px 0; }
-        .prob-val { font-size: 56px; font-weight: 900; color: var(--gold); text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
-
-        /* 模糊锁定 */
-        .lock-container {
-            background: rgba(0,0,0,0.3); border: 1px dashed rgba(255,255,255,0.3);
-            border-radius: 12px; padding: 20px; position: relative; overflow: hidden;
-        }
-        .blur-content { filter: blur(6px); opacity: 0.5; user-select: none; }
-        .lock-overlay {
+        .blur-text { filter: blur(6px); opacity: 0.6; user-select: none; color: #fff; line-height: 1.8; }
+        .lock-btn-area {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 5;
-        }
-        .unlock-btn {
-            background: linear-gradient(135deg, #f43f5e, #e11d48);
-            color: white; border: none; padding: 10px 25px; border-radius: 30px;
-            font-weight: bold; box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
-            cursor: pointer; animation: pulse 2s infinite;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px);
         }
 
-        /* ================= 6. 支付页 ================= */
-        .pay-panel { 
-            background: #fff; border-radius: 20px; padding: 30px 20px; text-align: center; color: #333; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
+        /* ================= 支付页 ================= */
+        .pay-panel { background: #fff; border-radius: 20px; padding: 30px 20px; text-align: center; color: #333; }
         .pay-title { font-size: 22px; color: #333; font-family: serif; margin-bottom: 5px; font-weight: bold; }
         .pay-price { font-size: 46px; color: #ff4757; font-weight: bold; margin-bottom: 5px; font-family: sans-serif; }
         .pay-old-price { color: #aaa; font-size: 13px; text-decoration: line-through; margin-bottom: 25px; }
@@ -190,104 +180,156 @@
         .copy-link { color: #ff4757; font-weight: bold; text-decoration: none; cursor: pointer; border-bottom: 1px solid rgba(255, 71, 87, 0.3); }
         .copy-link.blue { color: #3498db; border-bottom-color: rgba(52, 152, 219, 0.3); }
 
-        .btn-upload {
-            background: #2D6A4F; color: white; width: 100%; padding: 16px; border-radius: 10px; font-size: 16px; font-weight: bold; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3); margin-bottom: 20px;
+        .btn-upload { background: #2f4f4f; color: white; width: 100%; padding: 16px; border-radius: 10px; font-size: 16px; font-weight: bold; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(47, 79, 79, 0.3); transition: transform 0.1s; }
+        .btn-upload:active { transform: scale(0.98); }
+
+        /* 统一的底部招募样式 (Page 4 & 5) */
+        .footer-recruit-box {
+            border: 1px dashed rgba(255,255,255,0.4);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 13px;
         }
+        .recruit-link {
+            color: var(--text-main);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 5px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /* ================= 最终结果页 (深蓝尊贵版) ================= */
+        .prophecy-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(165, 180, 252, 0.3);
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+        .prophecy-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 20px;
+            border-bottom: 1px solid rgba(165, 180, 252, 0.2);
+            text-align: center;
+        }
+        .prophecy-title { color: var(--text-main); font-size: 18px; font-weight: bold; letter-spacing: 2px; margin-bottom: 5px; }
+        .prophecy-sub { color: var(--text-sub); font-size: 10px; text-transform: uppercase; }
         
-        /* 激活码输入区域 */
-        .code-area { border-top: 1px dashed #eee; padding-top: 20px; margin-top: 20px; }
-        .code-input-group { display: flex; gap: 10px; }
-        .code-input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #fcfcfc; }
-        .btn-code { background: #667eea; color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .prophecy-body { padding: 25px 20px; }
+        
+        /* 核心数据行 */
+        .meta-row { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .meta-item { text-align: center; flex: 1; }
+        .meta-label { font-size: 11px; color: var(--text-sub); margin-bottom: 5px; }
+        .meta-val { color: var(--accent-color); font-weight: bold; font-size: 15px; }
 
-        .footer-recruit-box { border: 1px dashed rgba(255,255,255,0.3); border-radius: 12px; padding: 15px; text-align: center; margin-top: 30px; color: rgba(255,255,255,0.8); font-size: 13px; }
-        .recruit-link { color: #fff; text-decoration: underline; cursor: pointer; margin-top: 5px; display: inline-block; }
-
-        /* ================= 7. 完整结果页 ================= */
-        .final-card {
-            background: #fff; border-radius: 16px; border: 2px solid #f3e5c9; padding: 30px 20px; position: relative; margin-bottom: 25px;
+        .section-box { margin-bottom: 25px; position: relative; padding-left: 15px; }
+        .section-box::before {
+            content: ''; position: absolute; left: 0; top: 5px; bottom: 5px; width: 3px;
+            background: var(--border-accent); border-radius: 2px;
         }
-        .final-card::before {
-            content: '“'; position: absolute; top: -10px; left: 20px; font-size: 60px; color: #f3e5c9; background: #fff; height: 30px; line-height: 40px; font-family: serif; padding: 0 10px;
+        .section-title { color: var(--text-main); font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+        .section-content { color: #cbd5e1; font-size: 14px; line-height: 1.7; text-align: justify; }
+
+        /* 签名区 */
+        .prophecy-footer {
+            background: rgba(15, 23, 42, 0.8); padding: 15px; text-align: right;
+            font-family: 'Cinzel', serif; color: var(--text-sub); font-size: 12px; letter-spacing: 1px;
         }
-        .result-section { margin-bottom: 25px; }
-        .res-title { color: #f43f5e; font-weight: bold; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .res-content { font-size: 15px; line-height: 1.7; color: #333; text-align: justify; }
 
-        /* ================= 8. 管理员后台 ================= */
-        .admin-stat { background: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 15px; border: 1px solid #e2e8f0; }
-        .admin-btn { width: 100%; padding: 12px; background: #475569; color: white; border: none; border-radius: 8px; margin-top: 10px; font-size: 14px; cursor: pointer; }
-        .card-list { max-height: 200px; overflow-y: auto; background: #fff; padding: 10px; border-radius: 8px; font-family: monospace; margin-top: 10px; font-size: 12px; border: 1px solid #e2e8f0; text-align: left; }
-        .card-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 5px 0; }
-
-        @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} }
+        /* 管理员后台 */
+        .admin-box { background: #fff; padding: 20px; border-radius: 12px; color: #333; margin-top: 20px; }
+        .admin-input { width: 100%; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <div id="page1" class="glass-card">
-        <div class="bottle-icon">🍾</div>
-        <h1 class="title-main">2026 许愿漂流瓶</h1>
-        <p class="subtitle">在这个瓶子里，写下你对2026年的一个执念</p>
-        
-        <div class="intro-box">
-            <div class="intro-title">🔮 什么是“许愿漂流瓶”？</div>
-            这是一个连接未来的能量场。当你写下愿望并抛出瓶子，宇宙的算法将为你计算圆梦概率，并回传一份来自2026年的<b>“行动指引”</b>。
+    <div id="landingPage" class="glass-card">
+        <div class="hero-logo">⏳</div>
+        <h1 class="hero-title">2026 时空胶囊</h1>
+        <p class="hero-sub">UNIVERSE RESONANCE SYSTEM</p>
+
+        <div class="matrix-grid">
+            <div class="matrix-item"><span class="m-icon">💰</span><div class="m-title">财富</div><div class="m-desc">财运爆发点</div></div>
+            <div class="matrix-item"><span class="m-icon">💘</span><div class="m-title">正缘</div><div class="m-desc">桃花时间线</div></div>
+            <div class="matrix-item"><span class="m-icon">📈</span><div class="m-title">事业</div><div class="m-desc">升职与上岸</div></div>
+            <div class="matrix-item"><span class="m-icon">🛡️</span><div class="m-title">避坑</div><div class="m-desc">转折点预警</div></div>
         </div>
 
+        <div class="vip-list">
+            <div class="vip-item">连接宇宙能量场，测算圆梦概率</div>
+            <div class="vip-item">获取 2026 年度关键词与幸运图腾</div>
+            <div class="vip-item highlight">解锁关键转折月 & 专属行动指南</div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="activationCode" class="input-glow" placeholder="在此输入 VIP 激活码 (选填)">
+        </div>
+
+        <button class="btn-cosmic" onclick="startApp()">开启时空连接</button>
+
+        <div style="text-align:center; margin-top:20px; font-size:12px; color:var(--text-sub); cursor:pointer;" onclick="showAdmin()">
+            Admin
+        </div>
+        <div style="text-align:center; margin-top:10px; font-size:11px; color:var(--text-sub); opacity:0.7;">
+            已有 32,109 人收取了未来回信
+        </div>
+    </div>
+
+    <div id="page1" class="hidden glass-card">
+        <div style="text-align:center; font-size:50px; margin-bottom:20px; filter:grayscale(0.3) drop-shadow(0 0 10px #6366f1);">🪐</div>
+        <h2 style="text-align:center; color:var(--text-main); margin-bottom:10px;">向宇宙发送信号</h2>
+        <p style="text-align:center; font-size:13px; color:var(--text-sub); margin-bottom:25px;">请写下你对 2026 年的一个执念，越真诚，回响越清晰。</p>
+        
         <textarea id="userWish" class="wish-textarea" placeholder="例如：
 希望2026年存款达到50万...
-希望能在今年遇见正缘...
-希望家人身体健康..."></textarea>
+希望今年能遇到懂我的伴侣...
+希望考研上岸，家人平安..."></textarea>
         
-        <button class="btn-glow" onclick="throwBottle()">
-            🌊 密封并抛入时间之海
+        <button class="btn-cosmic" onclick="throwBottle()">
+            密封并抛入星海
         </button>
-        
-        <div style="text-align:center; margin-top:20px; font-size:12px; opacity:0.3; cursor:pointer;" onclick="showAdminPanel()">⚡ 管理入口</div>
     </div>
 
     <div id="page2" class="hidden throwing-scene">
-        <div class="bottle-fly">🍾</div>
-        <div class="loading-text">
-            正在穿越 2025 的时间迷雾...<br>
-            <span style="font-size:12px; opacity:0.7;">正在连接宇宙能量场</span>
-        </div>
+        <div class="bottle-fly">📜</div>
+        <p style="color:var(--text-main); margin-top:30px; font-size:18px; letter-spacing:2px;">信号传输中...</p>
+        <p style="color:var(--text-sub); font-size:12px; margin-top:10px;">正在穿越 2025 时间迷雾</p>
     </div>
 
     <div id="page3" class="hidden">
-        <div class="glass-card" style="padding-top:10px;">
-            <div style="text-align:center; margin-bottom:15px;">
-                <span style="background:rgba(255,255,255,0.15); font-size:12px; padding:4px 12px; border-radius:12px;">✨ 收到一封来自未来的回信</span>
-            </div>
+        <div style="text-align:center; margin-bottom:20px;">
+            <span style="background:rgba(99, 102, 241, 0.2); color:var(--text-main); padding:5px 15px; border-radius:20px; font-size:12px; border:1px solid rgba(165, 180, 252, 0.3);">✨ 收到一封时空回信</span>
+        </div>
 
-            <div class="paper-scroll">
-                <div class="paper-header">
-                    <span>TO: 许愿人</span>
-                    <span>FROM: 2026.12.31</span>
-                </div>
-                <div id="aiResponseText" class="handwritten"></div>
-                <div class="stamp">宇宙<br>回响</div>
+        <div class="paper-scroll">
+            <div class="paper-header">
+                <span>TO: 许愿人</span>
+                <span>FROM: 2026.12.31</span>
             </div>
+            <div id="aiResponseText" style="line-height:1.8; text-align:justify; font-size:15px;"></div>
+            <div style="text-align:right; margin-top:20px; font-weight:bold; color:#888;">—— 宇宙回响</div>
+        </div>
 
-            <div class="prob-box">
-                <div style="font-size:14px; opacity:0.8;">愿望圆梦概率</div>
-                <div class="prob-val" id="probVal">92%</div>
+        <div class="blur-lock-box">
+            <div class="blur-text">
+                <p><strong>📅 2026 高能月份：</strong>5月、9月</p>
+                <p><strong>⚠️ 年度避坑指南：</strong>切记不要在...</p>
+                <p><strong>🛡️ 专属行动建议：</strong>坚持做这件事...</p>
             </div>
-
-            <div class="lock-container">
-                <div class="blur-content">
-                    <p><strong>🗓️ 关键转折点：</strong>2026年6月，你会遇到...</p>
-                    <p><strong>🚧 最大阻碍：</strong>情绪内耗可能会...</p>
-                    <p><strong>🚀 行动指南：</strong>坚持做这一件事...</p>
-                </div>
-                <div class="lock-overlay">
-                    <div style="font-size:24px; margin-bottom:5px;">🔒</div>
-                    <div style="font-size:14px; margin-bottom:10px; font-weight:bold;">解锁完整《圆梦指引》</div>
-                    <button class="unlock-btn" onclick="goToPay()">立即查看 (¥2.99)</button>
-                </div>
+            <div class="lock-btn-area">
+                <div style="font-size:24px; margin-bottom:10px;">🔒</div>
+                <div style="color:#fff; font-weight:bold; margin-bottom:15px; font-size:14px;">解锁完整《时空指引报告》</div>
+                <button class="btn-cosmic" style="width:auto; padding:10px 30px; font-size:14px;" onclick="goToPay()">
+                    立即查看 (¥2.99)
+                </button>
             </div>
         </div>
     </div>
@@ -327,82 +369,88 @@
                 📷 上传付款截图，自动解锁
                 <input type="file" accept="image/*" style="display:none" onchange="handleUpload(event)">
             </label>
-
-            <div class="code-area">
-                <div style="font-size:12px; color:#999; margin-bottom:8px;">已有激活码/万能码？</div>
-                <div class="code-input-group">
-                    <input type="text" id="activationCode" class="code-input" placeholder="请输入激活码">
-                    <button class="btn-code" onclick="verifyUnlockCode()">验证</button>
-                </div>
-            </div>
         </div>
         
-        <div class="footer-recruit-box">
-            <div><span class="recruit-icon">📢</span> 招许愿瓶项目学徒</div>
+        <div class="footer-recruit-box" style="margin-top:25px;">
+            <div>📢 招许愿瓶项目学徒</div>
             <div class="recruit-link" onclick="copyTxt('HCH91178')">微信: HCH91178 (点击复制)</div>
         </div>
     </div>
 
     <div id="page5" class="hidden">
-        <div style="text-align:center; margin-bottom:20px;">
-            <div style="font-size:40px;">✨</div>
-            <h2 style="color:#a5b4fc;">完整指引已解锁</h2>
+        <div style="text-align:center; margin-bottom:25px;">
+            <div style="font-size:40px; filter:drop-shadow(0 0 15px #6366f1);">✨</div>
+            <h2 style="color:var(--text-main); font-family:'Cinzel', serif; letter-spacing:2px;">PROPHECY UNLOCKED</h2>
         </div>
 
-        <div class="final-card">
-            <div class="result-section">
-                <div class="res-title">📅 2026年关键转折点</div>
-                <div id="fullRes1" class="res-content"></div>
+        <div class="prophecy-card">
+            <div class="prophecy-header">
+                <div class="prophecy-title">2026 时空指引</div>
+                <div class="prophecy-sub">Authorized by Universe Resonance</div>
+            </div>
+            
+            <div class="prophecy-body">
+                <div class="meta-row">
+                    <div class="meta-item">
+                        <div class="meta-label">年度关键词</div>
+                        <div class="meta-val" id="resKeyword">丰盛</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">高能月份</div>
+                        <div class="meta-val" id="resMonth">6月 / 11月</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">幸运图腾</div>
+                        <div class="meta-val" id="resTotem">🌊 海洋</div>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">📅 关键转折点</div>
+                    <div class="section-content" id="fullRes1"></div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">🚧 潜在绊脚石</div>
+                    <div class="section-content" id="fullRes2"></div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">🚀 宇宙行动建议</div>
+                    <div class="section-content" id="fullRes3"></div>
+                </div>
             </div>
 
-            <div class="result-section">
-                <div class="res-title">🚧 阻碍你的最大绊脚石</div>
-                <div id="fullRes2" class="res-content"></div>
-            </div>
-
-            <div class="result-section">
-                <div class="res-title">🚀 宇宙行动建议</div>
-                <div id="fullRes3" class="res-content"></div>
+            <div class="prophecy-footer">
+                Code: 2026-UNIVERSE-REPLY
             </div>
         </div>
 
-        <button class="btn-glow" style="background:#475569; box-shadow:none;" onclick="location.reload()">
-            再许一个愿
+        <button class="btn-cosmic" style="margin-top:25px;" onclick="location.reload()">
+            🌌 再许一个愿
         </button>
 
-        <div class="footer-recruit-box">
+        <div class="footer-recruit-box" style="margin-top:25px;">
             <div>📢 招许愿瓶项目学徒</div>
             <div class="recruit-link" onclick="copyTxt('HCH91178')">微信: HCH91178 (点击复制)</div>
         </div>
     </div>
 
     <div id="adminPage" class="hidden glass-card">
-        <h3 style="text-align:center; margin-bottom:15px; color:#fff;">🔧 管理员后台</h3>
-        <div id="adminLoginBox">
-            <input type="password" id="adminPwdInput" class="wish-textarea" style="height:50px; margin-bottom:10px;" placeholder="请输入管理员密码">
-            <button onclick="loginAdmin()" class="btn-glow" style="margin-top:10px;">登录</button>
+        <h3 style="text-align:center; margin-bottom:15px; color:var(--text-main);">🔧 管理员后台</h3>
+        <div id="adminLoginBox" style="text-align:center;">
+            <input type="password" id="adminPwd" class="wish-textarea" style="height:50px; margin-bottom:10px; background:#fff; color:#333;" placeholder="请输入密码">
+            <button onclick="loginAdmin()" class="btn-cosmic" style="padding:10px;">登录</button>
         </div>
-        
-        <div id="adminContent" class="hidden">
-            <div class="admin-stat">
-                <div style="font-size:24px; font-weight:bold; color:#333;" id="validCount">0</div>
-                <div style="font-size:12px; color:#666;">可用激活码</div>
+        <div id="adminPanel" class="hidden admin-box">
+            <div style="font-size:20px; font-weight:bold; margin-bottom:10px;">可用卡密: <span id="codeCount">0</span></div>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <input type="number" id="genNum" value="10" class="admin-input" style="width:80px; margin:0;">
+                <button onclick="genCodes()" style="padding:10px; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer;">生成</button>
             </div>
-            
-            <div style="background:#fff; padding:15px; border-radius:12px; color:#333;">
-                <h4 style="margin-bottom:10px;">生成新卡密</h4>
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="number" id="genCount" value="10" style="padding:8px; border:1px solid #ddd; border-radius:4px; width:80px;">
-                    <button class="admin-btn" style="margin-top:0; background:#667eea;" onclick="genCards()">生成</button>
-                </div>
-                <button onclick="exportCurrentBatch()" class="admin-btn" style="background:#2E7D32;">导出本次生成</button>
-                
-                <h4 style="margin-top:20px; margin-bottom:10px;">卡密列表 (前50条)</h4>
-                <div class="card-list" id="cardList"></div>
-                <button onclick="exportAllCards()" class="admin-btn" style="background:#00b894;">导出全部历史</button>
-            </div>
-            
-            <button onclick="location.reload()" class="admin-btn">退出后台</button>
+            <button onclick="exportCodes()" style="width:100%; padding:10px; background:#6366f1; color:#fff; border:none; border-radius:4px; margin-bottom:10px; cursor:pointer;">导出TXT</button>
+            <div id="codeList" style="max-height:150px; overflow-y:auto; background:#f9f9f9; padding:10px; font-size:12px; border:1px solid #eee;"></div>
+            <button onclick="location.reload()" style="width:100%; padding:10px; background:#ddd; border:none; border-radius:4px; margin-top:10px; cursor:pointer;">退出</button>
         </div>
     </div>
 
@@ -411,78 +459,99 @@
 <script>
     // 配置区
     const CONFIG = {
-        MASTER_CODE: "GEMINI-VIP", // 万能码，输入这个直接解锁
-        ADMIN_PWD: "lss900201",    // 后台密码
+        MASTER_CODE: "GEMINI-MASTER", 
+        ADMIN_PWD: "lss900201",    
         SERVER_KEY: "SCT303445TGU9j8Q5VLg6rT7eryLe8L41v"
     };
 
-    // Safari 容错存储
-    var safeStorage = {
-        _mem: {},
-        isAvailable: function() {
-            try { var x = '__storage_test__'; localStorage.setItem(x, x); localStorage.removeItem(x); return true; } catch(e) { return false; }
-        }(),
-        getItem: function(key) { return this.isAvailable ? localStorage.getItem(key) : this._mem[key]; },
-        setItem: function(key, val) { if(this.isAvailable) localStorage.setItem(key, val); else this._mem[key] = val; }
+    // 存储封装
+    const Store = {
+        get: (k) => JSON.parse(localStorage.getItem(k) || '[]'),
+        set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
     };
 
+    let isVIP = false;
     let userWishText = "";
     let detectedType = "general";
-    let currentBatchCards = [];
 
-    // 智能回复库
+    // 智能回复库 (扩充了关键词和图腾)
     const templates = {
         money: {
+            keyword: "丰盛", month: "8月 / 10月", totem: "🪙 金币",
             short: "我听到了金币碰撞的声音。2026年你的财帛宫有动静，曾经看似无用的投入，将在秋天迎来惊人的回报。",
             full1: "在2026年的8月-9月，你将迎来一次重要的财务契机。这可能源于一个‘旧识’带来的信息，或者一项副业的突然爆发。",
-            full2: "最大的绊脚石是‘急于求成’和‘跟风’。宇宙的能量通过积累运作，千万不要在黎明前放弃，也不要触碰不熟悉的投机项目。",
+            full2: "最大的绊脚石是‘急于求成’。宇宙的能量通过积累运作，千万不要在黎明前放弃，也不要触碰不熟悉的投机项目。",
             full3: "建立一个‘许愿账户’，每月存入一笔固定资金作为种子。多穿金色或红色的配饰，能增强你的吸金磁场。"
         },
         love: {
+            keyword: "羁绊", month: "3月 / 5月", totem: "🌸 桃花",
             short: "红色的丝线正在慢慢收紧。那个懂你奇奇怪怪，也陪你可可爱爱的人，正在穿越人海向你走来。",
             full1: "2026年的春季（3月-5月）桃花能量最旺。在一次非正式的聚会、旅行或学习场合中，你会遇到令你心动的人。",
-            full2: "最大的绊脚石是‘过去的阴影’和‘过度防御’。你潜意识里的防御机制让你在关系推进时想要后退。试着敞开心扉，这一次是安全的。",
+            full2: "最大的绊脚石是‘过度防御’。你潜意识里的防御机制让你在关系推进时想要后退。试着敞开心扉，这一次是安全的。",
             full3: "提升衣品，尝试换一个新发型。每周五晚上不要宅在家里，多去书店、艺术展或公园。你的正缘是一个温文尔雅的人。"
         },
         career: {
+            keyword: "跃升", month: "6月 / 12月", totem: "🏔️ 高山",
             short: "星盘显示你的‘官禄宫’正在闪耀。之前的迷茫将如大雾散去，一条清晰的上升通道正在为你打开。",
             full1: "年中（6月）将是你的转折点。一个困扰你许久的项目或考试将迎刃而解，你会得到上级或导师的高度认可。",
-            full2: "你最大的敌人是‘拖延’和‘自我怀疑’。不要等到准备好了再出发，现在就是最好的时机。小心身边一个属‘火’的竞争者。",
-            full3: "保持专注，减少无效社交。把办公桌或书桌整理干净，摆放一盆常青植物，有助于稳定你的事业/学业磁场。"
+            full2: "你最大的敌人是‘自我怀疑’。不要等到准备好了再出发，现在就是最好的时机。小心身边一个属‘火’的竞争者。",
+            full3: "保持专注，减少无效社交。把办公桌整理干净，摆放一盆常青植物，有助于稳定你的事业磁场。"
         },
         health: {
+            keyword: "疗愈", month: "4月 / 11月", totem: "🌿 森林",
             short: "宇宙感受到了你对安宁的渴望。2026年将是‘疗愈’的一年，旧的负担将卸下，身心将重获轻盈。",
-            full1: "入冬（11月）前后，你的身体能量会达到一个小高峰。利用这段时间养成一个新习惯（如瑜伽或晨跑），将受益终身。",
-            full2: "需要警惕的是‘情绪内耗’。身体的很多不适源于未表达的情绪。不要为了面子而压抑自己，学会拒绝不舒服的请求。",
-            full3: "多接触大自然，森林和海洋能快速为你充电。饮食上多摄入根茎类食物，它们能增强你与大地的连接，让你更稳重。"
+            full1: "入冬（11月）前后，你的身体能量会达到一个小高峰。利用这段时间养成一个新习惯（如瑜伽），将受益终身。",
+            full2: "需要警惕的是‘情绪内耗’。身体的很多不适源于未表达的情绪。学会拒绝不舒服的请求。",
+            full3: "多接触大自然，森林和海洋能快速为你充电。饮食上多摄入根茎类食物，增强你与大地的连接。"
         },
         general: {
+            keyword: "重塑", month: "7月 / 1月", totem: "🌟 星辰",
             short: "宇宙接收到了你的信号。虽然这个愿望有些独特，但2026年对你而言是‘重塑’的一年，新的翅膀正在生长。",
             full1: "下半年是你能量场的爆发期。你会意外获得一个展示自我的舞台，请务必抓住这次机会，不要退缩。",
-            full2: "阻碍你的是‘对未知的恐惧’。你习惯待在舒适区，但奇迹往往发生在舒适区之外。试着做一件你从未做过的事。",
-            full3: "保持每天记录三件感恩的小事。多晒太阳，保持房间通风。你的幸运色是白色和蓝色，它们能帮你理清思绪。"
+            full2: "阻碍你的是‘对未知的恐惧’。你习惯待在舒适区，但奇迹往往发生在舒适区之外。",
+            full3: "保持每天记录三件感恩的小事。多晒太阳。你的幸运色是白色和蓝色，它们能帮你理清思绪。"
         }
     };
 
-    // 校验逻辑
+    function startApp() {
+        const code = document.getElementById('activationCode').value.trim().toUpperCase();
+        if (code) {
+            if (code === CONFIG.MASTER_CODE) {
+                isVIP = true; alert("✨ 尊贵VIP身份已确认！"); goWish(); return;
+            }
+            const cards = Store.get('wish_codes');
+            const target = cards.find(c => c.code === code);
+            if (target && !target.used) {
+                target.used = true; Store.set('wish_codes', cards);
+                isVIP = true; alert("✅ 激活成功！本轮许愿将直接解锁完整指引。"); goWish();
+            } else {
+                alert("❌ 无效或已使用的激活码");
+            }
+        } else {
+            isVIP = false; goWish();
+        }
+    }
+
+    function goWish() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('page1').classList.remove('hidden');
+    }
+
     function validateInput(text) {
-        if (text.length < 2) return "信号太弱了，请多写几个字描述你的愿望...";
-        if (!/[a-zA-Z\u4e00-\u9fa5]/.test(text)) return "宇宙无法解读纯符号代码，请用文字写下愿望。";
-        if (/^(.)\1+$/.test(text)) return "请真诚地写下愿望，不要发送重复的信号干扰宇宙。";
+        if (text.length < 2) return "请多写几个字...";
+        if (!/[a-zA-Z\u4e00-\u9fa5]/.test(text)) return "宇宙无法解读纯符号。";
         return "OK";
     }
 
-    // 流程控制
     function throwBottle() {
         const wish = document.getElementById('userWish').value.trim();
-        const checkResult = validateInput(wish);
-        if (checkResult !== "OK") { alert("🔮 提示：\n" + checkResult); return; }
+        if (validateInput(wish) !== "OK") { alert(validateInput(wish)); return; }
         
         userWishText = wish;
-        if (wish.match(/钱|富|财|暴|赚|薪|贷|金|买房|车/)) detectedType = 'money';
-        else if (wish.match(/爱|婚|对象|男|女|桃花|伴|情|脱单/)) detectedType = 'love';
-        else if (wish.match(/工|业|职|干|升|学|考|研|分|榜|上岸/)) detectedType = 'career';
-        else if (wish.match(/病|瘦|美|健|康|安|寿|药/)) detectedType = 'health';
+        if (wish.match(/钱|富|财|暴|赚|薪|贷|金/)) detectedType = 'money';
+        else if (wish.match(/爱|婚|对象|男|女|桃花/)) detectedType = 'love';
+        else if (wish.match(/工|业|职|干|升|学|考|上岸/)) detectedType = 'career';
+        else if (wish.match(/病|瘦|美|健|康/)) detectedType = 'health';
         else detectedType = 'general';
 
         document.getElementById('page1').classList.add('hidden');
@@ -490,16 +559,17 @@
 
         setTimeout(() => {
             document.getElementById('page2').classList.add('hidden');
-            document.getElementById('page3').classList.remove('hidden');
-            generateResult();
+            if (isVIP) showFullResult();
+            else {
+                document.getElementById('page3').classList.remove('hidden');
+                generateResult();
+            }
         }, 3000);
     }
 
     function generateResult() {
         const tpl = templates[detectedType];
         document.getElementById('aiResponseText').innerText = tpl.short;
-        const prob = Math.floor(Math.random() * (99 - 85 + 1)) + 85;
-        document.getElementById('probVal').innerText = prob + "%";
         window.fullResultData = tpl;
     }
 
@@ -508,56 +578,30 @@
         document.getElementById('page4').classList.remove('hidden');
     }
 
-    // 图片上传处理
     function handleUpload(e) {
         if(e.target.files.length === 0) return;
-        document.querySelector('.btn-upload').innerHTML = '⏳ 正在连接未来...';
-
+        document.querySelector('.btn-upload').innerHTML = '⏳ 正在连接...';
+        
         fetch(`https://sctapi.ftqq.com/${CONFIG.SERVER_KEY}.send`, {
             method: 'POST', headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ title: '💰许愿瓶-新订单2.99', desp: `愿望: ${userWishText}\n类型: ${detectedType}` })
+            body: JSON.stringify({ title: '💰许愿瓶-新订单', desp: `愿望: ${userWishText}\n类型: ${detectedType}` })
         }).catch(()=>{});
 
         setTimeout(() => {
-            alert("✅ 宇宙能量连接成功！完整指引已解锁。");
+            alert("✅ 连接成功！");
             showFullResult();
         }, 1500);
     }
 
-    // 激活码验证
-    function verifyUnlockCode() {
-        const input = document.getElementById('activationCode').value.trim().toUpperCase();
-        if(!input) return alert('请输入激活码');
-
-        // 万能码
-        if(input === CONFIG.MASTER_CODE) {
-            alert("✨ 万能钥匙已生效！");
-            showFullResult();
-            return;
-        }
-
-        // 普通码验证
-        let cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
-        const cardIndex = cards.findIndex(c => c.code === input);
-
-        if(cardIndex !== -1) {
-            if(cards[cardIndex].used) {
-                alert('❌ 该激活码已被使用');
-            } else {
-                cards[cardIndex].used = true;
-                safeStorage.setItem('wish_cards', JSON.stringify(cards));
-                alert("✅ 激活成功！");
-                showFullResult();
-            }
-        } else {
-            alert('❌ 无效的激活码');
-        }
-    }
-
     function showFullResult() {
-        const tpl = window.fullResultData || templates.general;
+        const tpl = window.fullResultData || templates[detectedType];
+        document.getElementById('page3').classList.add('hidden');
         document.getElementById('page4').classList.add('hidden');
         document.getElementById('page5').classList.remove('hidden');
+        
+        document.getElementById('resKeyword').innerText = tpl.keyword;
+        document.getElementById('resMonth').innerText = tpl.month;
+        document.getElementById('resTotem').innerText = tpl.totem;
         document.getElementById('fullRes1').innerText = tpl.full1;
         document.getElementById('fullRes2').innerText = tpl.full2;
         document.getElementById('fullRes3').innerText = tpl.full3;
@@ -565,85 +609,39 @@
 
     function copyTxt(t) {
         const input = document.createElement('textarea');
-        input.value = t;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-        alert('复制成功');
+        input.value = t; document.body.appendChild(input);
+        input.select(); document.execCommand('copy');
+        document.body.removeChild(input); alert('复制成功');
     }
 
-    // --- 后台管理逻辑 ---
-    function showAdminPanel() {
-        document.getElementById('page1').classList.add('hidden');
-        document.getElementById('adminPage').classList.remove('hidden');
-    }
-
+    // 后台逻辑
+    function showAdmin() { document.getElementById('landingPage').classList.add('hidden'); document.getElementById('adminPage').classList.remove('hidden'); }
     function loginAdmin() {
-        const p = document.getElementById('adminPwdInput').value;
-        if(p === CONFIG.ADMIN_PWD) {
+        if (document.getElementById('adminPwd').value === CONFIG.ADMIN_PWD) {
             document.getElementById('adminLoginBox').classList.add('hidden');
-            document.getElementById('adminContent').classList.remove('hidden');
-            renderAdmin();
-        } else {
-            alert('密码错误');
-        }
+            document.getElementById('adminPanel').classList.remove('hidden');
+            refreshAdmin();
+        } else alert("密码错误");
     }
-
-    function genCards() {
-        const count = parseInt(document.getElementById('genCount').value);
-        if(!count || count < 1) return alert('请输入数量');
-        
-        let cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
-        currentBatchCards = []; 
-        
-        for(let i=0; i<count; i++) {
-            const code = 'WISH-' + Math.random().toString(36).substr(2,4).toUpperCase() + '-' + Math.random().toString(36).substr(2,4).toUpperCase();
-            const newCard = { code: code, used: false, time: new Date().toLocaleString() };
-            currentBatchCards.push(newCard); 
-        }
-        
-        cards = [...currentBatchCards, ...cards];
-        safeStorage.setItem('wish_cards', JSON.stringify(cards));
-        alert(`成功生成 ${count} 个激活码！`);
-        renderAdmin();
+    function genCodes() {
+        const num = parseInt(document.getElementById('genNum').value);
+        let cards = Store.get('wish_codes');
+        let newCards = [];
+        for(let i=0; i<num; i++) newCards.push({ code: 'WISH-' + Math.random().toString(36).substr(2,4).toUpperCase() + Math.random().toString(36).substr(2,4).toUpperCase(), used: false });
+        Store.set('wish_codes', [...newCards, ...cards]);
+        alert(`成功生成 ${num} 个`); refreshAdmin();
     }
-
-    function renderAdmin() {
-        const cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
-        const validCount = cards.filter(c => !c.used).length;
-        document.getElementById('validCount').innerText = validCount;
-
-        let html = '';
-        cards.slice(0, 50).forEach(c => {
-            html += `<div class="card-item">
-                <span style="font-weight:bold; color:${c.used ? '#999' : 'green'}">${c.code}</span>
-                <span>${c.used ? '🔴 已用' : '🟢 未用'}</span>
-            </div>`;
-        });
-        document.getElementById('cardList').innerHTML = html;
+    function refreshAdmin() {
+        const cards = Store.get('wish_codes');
+        document.getElementById('codeCount').innerText = cards.filter(c => !c.used).length;
+        document.getElementById('codeList').innerHTML = cards.map(c => `<div>${c.code} - ${c.used ? '🔴' : '🟢'}</div>`).join('');
     }
-
-    function exportCurrentBatch() {
-        if(currentBatchCards.length === 0) return alert('请先生成激活码');
-        const text = currentBatchCards.map(c => c.code).join('\n');
-        const blob = new Blob([text], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
+    function exportCodes() {
+        const cards = Store.get('wish_codes').map(c => c.code).join('\n');
+        const blob = new Blob([cards], {type: 'text/plain'});
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'wish_codes_new.txt';
-        a.click();
-    }
-
-    function exportAllCards() {
-        const cards = JSON.parse(safeStorage.getItem('wish_cards') || '[]');
-        if(cards.length === 0) return alert('暂无数据');
-        const text = cards.map(c => c.code).join('\n');
-        const blob = new Blob([text], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'wish_codes_all.txt';
+        a.href = URL.createObjectURL(blob);
+        a.download = 'wish_codes.txt';
         a.click();
     }
 </script>
